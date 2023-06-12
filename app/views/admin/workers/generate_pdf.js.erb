@@ -1,0 +1,8 @@
+var intervalId = setInterval(function() {
+    $.get('<%= admin.path(:check_status) %>', { job_id: '<%= @job_id %>' }, function(data, status) {
+        if (status === 'success') {
+            clearInterval(intervalId);
+            window.location.href = '<%= admin.path(:check_status) %>?job_id=<%= @job_id %>';
+        }
+    });
+}, 1000);

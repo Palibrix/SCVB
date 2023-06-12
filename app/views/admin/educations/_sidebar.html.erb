@@ -1,0 +1,25 @@
+
+<h3><%= instance.class.name%> Details</h3>
+<ul>
+  <li><strong>ID:</strong> <%= instance.id %></li>
+  <li><strong>Created at:</strong> <%= instance.created_at %></li>
+  <li><strong>Updated at:</strong> <%= instance.updated_at %></li>
+
+  <% if instance.persisted? %>
+    <%= form_tag({action: :update}, method: :patch) do %>
+      <%= submit_tag "Save #{instance.class.name}", class: 'btn btn-success', style: 'margin: 5px; width: 100%;' %>
+    <% end %>
+    <%= form_tag({action: :destroy}, method: :delete) do %>
+      <%= hidden_field_tag :id, instance.id %>
+      <%= button_tag(type: 'submit', class: "btn btn-danger has-icon", style: "margin: 5px; width: 100%;", data: { toggle: "confirm-delete"}) do %>
+        <i class="fa fa-trash"></i>
+        <span class="btn-label">Delete <%= instance.class.name %></span>
+      <% end %>
+    <% end %>
+  <% else %>
+    <%= form_tag({action: :create}, method: :post) do %>
+      <%= submit_tag "Create #{instance.class.name}", class: 'btn btn-success', style: 'margin: 5px; width: 100%;' %>
+    <% end %>
+  <% end %>
+
+</ul>

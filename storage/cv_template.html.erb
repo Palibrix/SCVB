@@ -1,0 +1,158 @@
+<html>
+<head>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        .container {
+            display: -webkit-box;
+        }
+
+        .column {
+            padding: 10px;
+        }
+
+        .first-column {
+            -webkit-box-flex: 1;
+            background-color: #F0E9E0;
+        }
+
+        h3 {
+            font-size: 22px;
+        }
+
+        li, p{
+            font-size: 18px;
+        }
+
+        p {
+            padding-left: 5px
+        }
+
+        ul{
+            padding-left: 20px;
+        }
+
+        .second-column {
+            -webkit-box-flex: 9;
+            background-color: white;
+        }
+
+        .title-block {
+            background-color: #888888;
+            color: white;
+            padding-top: 5px;
+            padding-bottom: 5px;
+            padding-left: 5px;
+            margin-bottom: 10px;
+        }
+
+        .content-block {
+            padding: 10px;
+        }
+
+        .separator-line {
+            border-bottom: 4px solid #CCCCCC;
+        }
+
+    </style>
+</head>
+<body>
+
+<% qualities = JSON.parse(qualities) %>
+<% languages = JSON.parse(languages) %>
+<% educations = JSON.parse(educations) %>
+<% technologies = JSON.parse(technologies) %>
+<% projects = JSON.parse(projects) %>
+
+<div class="container">
+    <div class="column first-column" style="padding: 0">
+        <div class="title-block">
+            <h1><%= name %> <%= surname %></h1>
+            <h2><%= occupation %></h2>
+        </div>
+        <div class="content-block" style="padding: 0;">
+            <!-- Added display to heading -->
+            <h3 style="background-color: #888888; margin-top: 30px; color: white; padding-top: 5px; padding-left: 5px; padding-bottom: 5px; width: 100%; display: block;">Personal Qualities</h3>
+            <ul style="list-style-position: inside; padding-left: 20px">
+              <% for quality in qualities %>
+                <li><%= quality['name'] %></li>
+              <% end %>
+            </ul>
+        </div>
+      <div class="content-block" style="padding: 0;">
+        <!-- Added display to heading -->
+        <h3 style="background-color: #888888; margin-top: 30px; color: white; padding-top: 5px; padding-left: 5px; padding-bottom: 5px; width: 100%; display: block;">Languages</h3>
+        <ul style="list-style-position: inside; padding-left: 20px">
+          <% for language in languages %>
+            <li><%= language['name'] %> - <%= language['level'] %></li>
+          <% end %>
+        </ul>
+      </div>
+        <div class="content-block" style="padding: 0;">
+            <!-- Added display to heading -->
+            <h3 style="background-color: #888888; color: white; padding-top: 5px; padding-left: 5px; padding-bottom: 5px; width: 100%; display: block;">Contact Information</h3>
+            <p>Phone: <%= phone %></p>
+            <p>Email: <%= email %></p>
+            <p>Location: <%= address %></p>
+        </div>
+    </div>
+
+    <div class="column second-column">
+        <div class="content-block">
+            <h3>About Myself</h3>
+            <hr class="separator-line">
+            <p><%= about %></p>
+        </div>
+        <div class="content-block">
+            <h3>Study</h3>
+            <hr class="separator-line">
+            <ul style="list-style-position: inside;">
+
+              <% for education in educations %>
+                <li><%= education['name'] %>, <%= education['specialization'] %>, <%= education['term'] %></li>
+              <% end %>
+
+            </ul>
+        </div>
+        <div class="content-block">
+            <h3>Technologies</h3>
+            <hr class="separator-line">
+            <ul style="display: -webkit-box; flex-wrap: wrap; list-style-position: inside;">
+                <% for technology in technologies %>
+                  <li style="margin-right: 10px; vertical-align: bottom;"> <%= technology['name'] %></li>
+                <% end %>
+            </ul>
+
+        </div>
+        <div class="content-block">
+            <h3>Experience</h3>
+            <hr class="separator-line">
+            <ul style="list-style-position: inside;">
+              <% for project in projects %>
+                <li>Company name: <%= project['company'] %>(<%= project['term'] %>), project: <%= project['name'] %></li>
+                <p style="margin-top: 5px; margin-left: 10px"><%= project['additions'] %></p>
+                <p style="margin-top: 5px; margin-left: 10px">Technologies:</p>
+                <% project_object = Project.find(project['id']) %>
+                <ul style="display: -webkit-box; flex-wrap: wrap; list-style-position: inside; border-bottom: 1px solid #CCCCCC; margin-bottom: 10px">
+                  <% for proj_technology in project_object.technologies %>
+                    <li style="margin-right: 10px; vertical-align: bottom;"> <%= proj_technology['name'] %></li>
+                  <% end %>
+                  <br>
+                </ul>
+<!--                <li><%#= project_object.technologies %></li>-->
+              <% end %>
+<!--                <li>Job title, Company name, Duration</li>-->
+            </ul>
+        </div>
+
+
+
+    </div>
+
+
+</div>
+
+</body>
+</html>
