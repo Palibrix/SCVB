@@ -8,10 +8,11 @@ class PdfGeneratorJob
     route = 'storage/cv.pdf'
 
     template = ERB.new(html)
-
     rendered_text = template.result(binding)
 
     kit = PDFKit.new(rendered_text, :enable_local_file_access => true)
     kit.to_file(route)
+
   end
 end
+

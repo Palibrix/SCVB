@@ -7,6 +7,7 @@ Trestle.resource(:projects) do
     text_field :name
     text_field :company
     text_field :term
+    text_field :URL
     text_area :additions
 
     collection_select :technology_ids, Technology.all, :id, :name_with_tool, { label: "Technology(ies)" }, { multiple: true }

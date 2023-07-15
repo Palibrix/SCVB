@@ -24,3 +24,4 @@ class Language < ApplicationRecord
     end
   end
 end
+

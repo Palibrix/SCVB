@@ -17,6 +17,9 @@ Trestle.resource(:technologies) do
     scope :Databases, -> {
       Technology.where(tool: 'Database')
     }
+    scope :Other, -> {
+      Technology.where(tool: 'Other')
+    }
   end
 
   form do |technology|

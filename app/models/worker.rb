@@ -15,3 +15,5 @@ class Worker < ApplicationRecord
   has_many :qualities, through: :worker_qualities
 
 end
+
+

@@ -19,11 +19,14 @@
         }
 
         h3 {
-            font-size: 22px;
+            margin-top: 0;
+            /*padding-top: 0;*/
+            font-size: 28px;
         }
 
         li, p{
-            font-size: 18px;
+            font-size: 24px;
+            list-style-type: none;
         }
 
         p {
@@ -49,13 +52,18 @@
         }
 
         .content-block {
-            padding: 10px;
+            padding: 5px;
         }
 
         .separator-line {
             border-bottom: 4px solid #CCCCCC;
         }
 
+        li:before {
+            /*list-style-type: circle;*/
+            content: "• ";
+            /*font-size: 15px;*/
+        }
     </style>
 </head>
 <body>
@@ -120,9 +128,11 @@
             <h3>Technologies</h3>
             <hr class="separator-line">
             <ul style="display: -webkit-box; flex-wrap: wrap; list-style-position: inside;">
+              <div>
                 <% for technology in technologies %>
-                  <li style="margin-right: 10px; vertical-align: bottom;"> <%= technology['name'] %></li>
+                  <li style="margin-right: 10px; vertical-align: bottom; display: inline-block"> <%= technology['name'] %></li>
                 <% end %>
+              </div>
             </ul>
 
         </div>
@@ -131,8 +141,11 @@
             <hr class="separator-line">
             <ul style="list-style-position: inside;">
               <% for project in projects %>
-                <li>Company name: <%= project['company'] %>(<%= project['term'] %>), project: <%= project['name'] %></li>
+                <p>Company name: <%= project['company'] %>(<%= project['term'] %>), project: <%= project['name'] %></p>
                 <p style="margin-top: 5px; margin-left: 10px"><%= project['additions'] %></p>
+                <% if project['URL'] != "" %>
+                  <p style="margin-left: 10px">GitHub: <%= project['URL'] %></p>
+                <% end %>
                 <p style="margin-top: 5px; margin-left: 10px">Technologies:</p>
                 <% project_object = Project.find(project['id']) %>
                 <ul style="display: -webkit-box; flex-wrap: wrap; list-style-position: inside; border-bottom: 1px solid #CCCCCC; margin-bottom: 10px">
